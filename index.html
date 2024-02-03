@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yes or No?</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 90vh;
+            margin: 0;
+            background-color: #e100ff;
+            overflow: hidden; /* Add this line */
+        }
+
+        #gif-container {
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.822);
+            padding: 10px;
+            border-radius: 5px;
+        }
+        #yes-button, #no-button {
+            position: absolute;
+            bottom: -80px;
+            cursor: pointer;
+            padding: 10px 20px;
+            border: none;
+            color: #fff;
+            font-size: 40px;
+            border-radius: 10px;
+            transition: transform 0.2s;
+        }
+        #no-button {
+            right: 10px;
+            background-color: #ff0000;
+        }
+        #yes-button{
+            left: 20px;
+            background-color: #00ff15;
+        }
+        p{
+            font-size: 80px;
+            color: white;
+            position: relative;
+            bottom: 250px;
+            background-color: rgba(0, 0, 0, 0.822);
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="gif-container">
+        <!-- Replace the src attribute with your GIF URL -->
+        <img src="bear-kiss-bear-kisses.gif" alt="GIF">
+        <button id="yes-button">Yes</button>
+        <!-- Inside the #no-button element -->
+        <button id="no-button">
+            <span id="no-button-text">No</span>
+        </button>
+    </div>
+    <p>Will you be my Valentine?</p>
+
+    <script>
+// script.js
+const yesButton = document.getElementById('yes-button');
+const noButton = document.getElementById('no-button');
+const noButtonText = document.getElementById('no-button-text');
+let noClicks = 0;
+let currentWordIndex = 0;
+
+// Define an array of 20 different words
+const randomWords = ["Please?", "Stop", "Think about it?", "Rethink it", "Re-evaluate it", "Reconsider?", "Change your mind?", "Have second thoughts?", "Dont you love me :(", "But?", "WHY?", "CLICK YES", "WRONG", "So you hate me", "😥", "LAST CHANCE", "BYE BYE"];
+
+function handleNoButtonClick() {
+    noClicks++;
+
+    if (noClicks >= 18) {
+        noButton.style.display = 'none';
+    }
+
+    // Change the text inside the button to the current word
+    const currentWord = randomWords[currentWordIndex];
+    noButtonText.textContent = currentWord;
+
+    // Increment the current word index, and loop back to 0 if at the end
+    currentWordIndex = (currentWordIndex + 1) % randomWords.length;
+
+    // Rest of your code remains unchanged
+    const currentFontSize = parseInt(window.getComputedStyle(yesButton).fontSize);
+    yesButton.style.fontSize = (currentFontSize + 5) + "px";
+
+    // Define the padding to keep the button within the visible area
+    const padding = 50;
+
+    // Calculate random coordinates within the visible area
+    const maxX = 300;
+    const maxY = 300;
+
+    const randomX = Math.max(padding, Math.floor(Math.random() * maxX));
+    const randomY = Math.max(padding, Math.floor(Math.random() * maxY));
+
+    // Move the "No" button to the random coordinates
+    noButton.style.transform = `translate(${randomX}px, ${randomY}px)`;
+}
+
+// Rest of your code remains unchanged
+
+noButton.addEventListener('click', handleNoButtonClick);
+yesButton.addEventListener('click', handleYesButtonClick);
+
+function handleYesButtonClick() {
+            window.location.href = 'yes.html';
+        }
+
+    </script>
+</body>
+</html>
